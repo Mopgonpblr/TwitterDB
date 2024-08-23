@@ -1,5 +1,6 @@
 package service;
 
+import org.postgresql.ds.PGSimpleDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.*;
@@ -46,6 +47,15 @@ public class ContextConfiguration {
 
     @Value("${spring.datasource.password}")
     private String password;
+
+    @Bean
+    public DataSource dataSource() {
+        PGSimpleDataSource dataSource = new PGSimpleDataSource();
+        dataSource.setUser(userName);
+        dataSource.setPassword(password);
+        dataSource.setUrl(url);
+        return dataSource;
+    }
 
     @Bean
     public PlatformTransactionManager hibernateTransactionManager(SessionFactory sessionFactory) {
