@@ -2,6 +2,7 @@ package service;
 
 import org.postgresql.ds.PGSimpleDataSource;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.*;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -31,29 +32,17 @@ public class ContextConfiguration {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
-        sessionFactory.setPackagesToScan("com.example.entity");
-        sessionFactory.setHibernateProperties(hibernateProperties());
+        sessionFactory.setPackagesToScan("entities");
 
         return sessionFactory;
     }
-    @Value("${spring.datasource.driver-class-name}")
-    private String driverName;
-
-    @Value("${spring.datasource.url}")
-    private String url;
-
-    @Value("${spring.datasource.username}")
-    private String userName;
-
-    @Value("${spring.datasource.password}")
-    private String password;
 
     @Bean
     public DataSource dataSource() {
         PGSimpleDataSource dataSource = new PGSimpleDataSource();
-        dataSource.setUser(userName);
-        dataSource.setPassword(password);
-        dataSource.setUrl(url);
+        dataSource.setUser("username");
+        dataSource.setPassword("password");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/my_ticket_service_db");
         return dataSource;
     }
 
@@ -64,23 +53,5 @@ public class ContextConfiguration {
         return transactionManager;
     }
 
-    private Properties hibernateProperties() {
-        Properties hibernateProperties = new Properties();
-        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
-        hibernateProperties.setProperty("hibernate.show_sql", "true");
-        hibernateProperties.setProperty("hibernate.format_sql", "true");
-        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
-        return hibernateProperties;
-    }
-/*
-    @Bean
-    public UserService userService(){
-        return new UserService();
-    }
 
-    @Bean
-    public TweetService tweetService(){
-        return new TweetService();
-    }
-*/
 }

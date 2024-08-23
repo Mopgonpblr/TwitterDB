@@ -2,19 +2,24 @@ package dao;
 
 import entities.Tweet;
 import entities.User;
-import hibernate.SessionFactoryProvider;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.stereotype.Repository;
+
 
 @Repository
 public class UserDao {
 
     @Autowired
-    private SessionFactory sessionFactory;
+    private SessionFactory sessionFactory; //= SessionFactoryProvider.getSessionFactory();
+
+    public UserDao(SessionFactory sessionFactory){
+        this.sessionFactory = sessionFactory;
+    }
 
     public void create(User user) {
         Session session = sessionFactory.openSession();

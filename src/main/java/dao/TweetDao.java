@@ -1,7 +1,7 @@
 package dao;
 
 import entities.Tweet;
-import hibernate.SessionFactoryProvider;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -15,7 +15,11 @@ import java.util.List;
 @Repository
 public class TweetDao {
     @Autowired
-    private SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;//  = SessionFactoryProvider.getSessionFactory();
+
+    public TweetDao(SessionFactory sessionFactory){
+        this.sessionFactory = sessionFactory;
+    }
 
     @Transactional
     public void save(Tweet tweet) {

@@ -2,6 +2,8 @@ import dao.*;
 import entities.*;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import service.*;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

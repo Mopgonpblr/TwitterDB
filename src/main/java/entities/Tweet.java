@@ -10,10 +10,10 @@ public class Tweet {
     @Id
     private int id;
 
-    @Column(name = "username")
+    @Column
     private String username;
 
-    @Column(name = "text")
+    @Column
     private String text;
 
     @Column(name = "creation_date")

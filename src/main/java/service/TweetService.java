@@ -1,8 +1,11 @@
 package service;
 
 import dao.TweetDao;
+import dao.UserDao;
 import entities.Tweet;
 import jakarta.transaction.Transactional;
+import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.*;
 
 import java.util.List;
@@ -11,8 +14,11 @@ import java.util.List;
 @Service
 @Transactional
 public class TweetService {
-    private final TweetDao tweetDao = new TweetDao();
+    private final TweetDao tweetDao;
 
+    public TweetService(LocalSessionFactoryBean sessionFactory){
+        tweetDao = new TweetDao(sessionFactory.getObject());
+    }
 
     public Tweet findTweetsById(int id){
         return tweetDao.getTweetById(id);
