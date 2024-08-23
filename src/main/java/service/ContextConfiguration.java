@@ -33,7 +33,7 @@ public class ContextConfiguration {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
         sessionFactory.setPackagesToScan("entities");
-
+        sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }
 
@@ -53,5 +53,8 @@ public class ContextConfiguration {
         return transactionManager;
     }
 
+    private Properties hibernateProperties() {
+        return new Properties();
+    }
 
 }

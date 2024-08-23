@@ -8,12 +8,13 @@ import java.time.LocalDate;
 @Table(name = "users")
 public class User {
     @Id
+    @Column(name = "username")
     private String username;
 
-    @Column
+    @Column(name = "name")
     private String name;
 
-    @Column
+    @Column(name = "avatar")
     private String avatar;
 
     @Column(name = "creation_date")
