@@ -60,9 +60,4 @@ public class ContextConfiguration {
         return new TweetDao();
     }
 
-    @Bean
-    public UserService userService(){
-        return new UserService();
-    }
-
 }

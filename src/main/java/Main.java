@@ -1,13 +1,17 @@
 import entities.*;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.core.io.Resource;
 import service.*;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 //@SpringBootApplication
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         AnnotationConfigApplicationContext context
                 = new AnnotationConfigApplicationContext(ContextConfiguration.class);
@@ -33,7 +37,6 @@ public class Main {
             System.out.println(tweet);
         }
 
-
         try {
             userService.updateAvatar(user.getUsername(), "Bird.png", 3);
             System.out.println(userService.findUser(user.getUsername()));
@@ -48,5 +51,21 @@ public class Main {
         tweetService.deleteTweet(tweet1);
 
         userService.deleteUser(user);
+
+        Resource res = context.getResource("classpath:ticketData.txt");
+        ArrayList<String> list = createArrayList(res);
+        System.out.println(list.get(0));
+    }
+
+    public static ArrayList<String> createArrayList(Resource res) throws IOException {
+        ArrayList<String> list = new ArrayList<>();
+
+        Scanner scanner = new Scanner(res.getContentAsString(Charset.defaultCharset()));
+        while (scanner.hasNextLine()) {
+            list.add(scanner.nextLine());
+        }
+
+        scanner.close();
+        return list;
     }
 }
