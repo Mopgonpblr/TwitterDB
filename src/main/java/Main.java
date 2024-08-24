@@ -1,10 +1,12 @@
 import entities.*;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import service.*;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.List;
 
 //@SpringBootApplication
+@EnableTransactionManagement
 public class Main {
     public static void main(String[] args) {
 
