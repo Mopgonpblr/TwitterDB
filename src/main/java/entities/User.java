@@ -9,13 +9,12 @@ import java.time.LocalDate;
 public class User {
 
     @Id
-    @Column(name="username")
     private String username;
 
-    @Column(name = "name")
+    @Column
     private String name;
 
-    @Column(name = "avatar")
+    @Column
     private String avatar;
 
     @Column(name = "creation_date")

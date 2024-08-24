@@ -1,23 +1,20 @@
 package service;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import dao.TweetDao;
+import dao.UserDao;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.*;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
-
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import javax.sql.DataSource;
-import java.util.Properties;
 
-@Configuration
-@EnableTransactionManagement
-@ConfigurationProperties
+//@Configuration
+//@EnableTransactionManagement
 @ComponentScan
 @PropertySource("classpath:application.properties")
 public class ContextConfiguration {
@@ -31,16 +28,16 @@ public class ContextConfiguration {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
         sessionFactory.setPackagesToScan("entities");
-        //sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }
 
     @Bean
-    public DataSource dataSource() {
+    @Autowired
+    public DataSource dataSource(@Value("${spring.datasource.username}") String userName, @Value("${spring.datasource.password}")String password, @Value("${spring.datasource.url}") String url) {
         DataSourceBuilder dataSource = DataSourceBuilder.create();
-        dataSource.username("username");
-        dataSource.password("password");
-        //dataSource.url("jdbc:postgresql://localhost:5432/twitter_db");
+        dataSource.username(userName);
+        dataSource.password(password);
+        dataSource.url(url);
         return dataSource.build();
     }
 
@@ -51,10 +48,14 @@ public class ContextConfiguration {
         return transactionManager;
     }
 
-    private Properties hibernateProperties() {
-        Properties properties = new Properties();
-        //properties.setProperty("hibernate.dialect","org.hibernate.dialect.PostgreSQLDialect");
-        return properties;
+    @Bean
+    public UserDao userDao(){
+        return new UserDao();
+    }
+
+    @Bean
+    public TweetDao tweetDao(){
+        return new TweetDao();
     }
 
 }

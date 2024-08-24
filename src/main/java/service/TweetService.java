@@ -1,24 +1,16 @@
 package service;
 
 import dao.TweetDao;
-import dao.UserDao;
 import entities.Tweet;
-import jakarta.transaction.Transactional;
-import org.hibernate.SessionFactory;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 
 import java.util.List;
 
 @Component
-@Service
-@Transactional
 public class TweetService {
-    private final TweetDao tweetDao;
-
-    public TweetService(LocalSessionFactoryBean sessionFactory){
-        tweetDao = new TweetDao(sessionFactory.getObject());
-    }
+    @Autowired
+    private TweetDao tweetDao;
 
     public Tweet findTweetsById(int id){
         return tweetDao.getTweetById(id);
