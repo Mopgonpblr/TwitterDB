@@ -1,9 +1,7 @@
 package service;
 
-import org.postgresql.ds.PGSimpleDataSource;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.*;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -20,8 +18,8 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @ConfigurationProperties
-@PropertySource("classpath:application.properties")
 @ComponentScan
+@PropertySource("classpath:application.properties")
 public class ContextConfiguration {
 
 
@@ -33,17 +31,17 @@ public class ContextConfiguration {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
         sessionFactory.setPackagesToScan("entities");
-        sessionFactory.setHibernateProperties(hibernateProperties());
+        //sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }
 
     @Bean
     public DataSource dataSource() {
-        PGSimpleDataSource dataSource = new PGSimpleDataSource();
-        dataSource.setUser("username");
-        dataSource.setPassword("password");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/my_ticket_service_db");
-        return dataSource;
+        DataSourceBuilder dataSource = DataSourceBuilder.create();
+        dataSource.username("username");
+        dataSource.password("password");
+        //dataSource.url("jdbc:postgresql://localhost:5432/twitter_db");
+        return dataSource.build();
     }
 
     @Bean
@@ -54,7 +52,9 @@ public class ContextConfiguration {
     }
 
     private Properties hibernateProperties() {
-        return new Properties();
+        Properties properties = new Properties();
+        //properties.setProperty("hibernate.dialect","org.hibernate.dialect.PostgreSQLDialect");
+        return properties;
     }
 
 }

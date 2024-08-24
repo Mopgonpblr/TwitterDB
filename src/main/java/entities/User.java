@@ -7,8 +7,9 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
-    @Column(name = "username")
+    @Column(name="username")
     private String username;
 
     @Column(name = "name")
@@ -42,6 +43,7 @@ public class User {
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
+
 
     public String toString() {
         return this.username + " | " + this.name + " | " + this.creationDate;
