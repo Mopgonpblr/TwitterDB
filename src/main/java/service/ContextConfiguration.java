@@ -11,10 +11,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
 import javax.sql.DataSource;
 
-//@Configuration
-//@EnableTransactionManagement
+@Configuration
+@EnableTransactionManagement
 @ComponentScan
 @PropertySource("classpath:application.properties")
 public class ContextConfiguration {
@@ -56,6 +58,11 @@ public class ContextConfiguration {
     @Bean
     public TweetDao tweetDao(){
         return new TweetDao();
+    }
+
+    @Bean
+    public UserService userService(){
+        return new UserService();
     }
 
 }

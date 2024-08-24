@@ -4,6 +4,7 @@ import constants.AutoTweets;
 import dao.UserDao;
 import entities.Tweet;
 import entities.User;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,9 @@ public class UserService {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private SessionFactory sessionFactory;
 
     @Value("${property.update-user-and-tweet}")
     private boolean allowed;

@@ -6,7 +6,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import java.util.List;
 
 //@SpringBootApplication
-@EnableTransactionManagement
 public class Main {
     public static void main(String[] args) {
 
