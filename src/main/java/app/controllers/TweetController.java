@@ -15,8 +15,7 @@ public class TweetController {
     TweetService service;
 
     @GetMapping(value = "/")
-    public Tweet singleTweet(){
+    public Tweet singleTweet() {
         return service.findTweetsById(1);
     }
-
 }

@@ -7,13 +7,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
 @Configuration
-//@ComponentScan(basePackages = {"app/dao", "app/service"})
-//@PropertySource("classpath:application.properties")
 public class ContextConfiguration {
 
     @Bean
@@ -30,17 +27,6 @@ public class ContextConfiguration {
         sessionFactory.setPackagesToScan("app/entities");
         return sessionFactory;
     }
-/*
-    @Bean
-    public DataSource dataSource(@Value("${spring.datasource.username}") String userName, @Value("${spring.datasource.password}")String password, @Value("${spring.datasource.url}") String url) {
-        DataSourceBuilder dataSource = DataSourceBuilder.create();
-        dataSource.username(userName);
-        dataSource.password(password);
-        dataSource.url(url);
-        return dataSource.build();
-    }
-
- */
 
     @Bean
     @ConditionalOnProperty("property.condition")

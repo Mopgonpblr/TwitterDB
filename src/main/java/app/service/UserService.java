@@ -4,7 +4,6 @@ import app.constants.AutoTweets;
 import app.dao.UserDao;
 import app.entities.Tweet;
 import app.entities.User;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

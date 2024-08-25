@@ -21,7 +21,6 @@ public class Main {
     public static void main(String[] args) {
 
         ApplicationContext context = SpringApplication.run(Main.class, args);
-        //new AnnotationConfigApplicationContext(ContextConfiguration.class);
 
         UserService userService = context.getBean("userService", UserService.class);
         TweetService tweetService = context.getBean("tweetService", TweetService.class);
@@ -61,9 +60,9 @@ public class Main {
 
         Resource res = context.getResource("classpath:ticketData.txt");
         ArrayList<String> list = createArrayList(res);
+
         System.out.println(list.get(0));
         System.out.println("\n" + userService.getConditionalValue());
-
     }
 
 
@@ -74,7 +73,6 @@ public class Main {
             while (scanner.hasNextLine()) {
                 list.add(scanner.nextLine());
             }
-
             scanner.close();
         } catch (IOException e) {
             System.err.println(e.getMessage());

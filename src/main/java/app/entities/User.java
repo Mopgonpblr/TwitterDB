@@ -43,7 +43,7 @@ public class User {
         this.avatar = avatar;
     }
 
-
+    @Override
     public String toString() {
         return this.username + " | " + this.name + " | " + this.creationDate;
     }

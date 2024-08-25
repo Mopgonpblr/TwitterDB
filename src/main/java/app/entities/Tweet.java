@@ -42,10 +42,11 @@ public class Tweet {
         return text;
     }
 
-    public LocalDate getCreationDate(){
+    public LocalDate getCreationDate() {
         return creationDate;
     }
 
+    @Override
     public String toString() {
         return "\t" + this.username + "\n" + this.text + "\n " + this.creationDate + "\n\n";
     }
