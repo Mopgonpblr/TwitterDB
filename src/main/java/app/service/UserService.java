@@ -1,25 +1,26 @@
-package service;
+package app.service;
 
-import constants.AutoTweets;
-import dao.UserDao;
-import entities.Tweet;
-import entities.User;
+import app.constants.AutoTweets;
+import app.dao.UserDao;
+import app.entities.Tweet;
+import app.entities.User;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
 @Component
-
+@Service
 public class UserService {
 
     @Autowired
     private UserDao userDao;
 
     @Autowired
-    private SessionFactory sessionFactory;
+    private String conditionalValue;
 
     @Value("${property.update-user-and-tweet}")
     private boolean allowed;
@@ -47,5 +48,9 @@ public class UserService {
         } else {
             throw new Exception("property.update-user-and-tweet = false");
         }
+    }
+
+    public String getConditionalValue() {
+        return conditionalValue;
     }
 }

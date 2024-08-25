@@ -1,11 +1,13 @@
-package dao;
+package app.dao;
 
-import entities.Tweet;
-import entities.User;
+import app.entities.Tweet;
+import app.entities.User;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 
+@Component
 public class UserDao {
 
     @Autowired

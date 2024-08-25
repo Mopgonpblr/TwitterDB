@@ -1,12 +1,13 @@
-package dao;
+package app.dao;
 
-import entities.Tweet;
+import app.entities.Tweet;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-
+@Component
 public class TweetDao {
     @Autowired
     private SessionFactory sessionFactory;

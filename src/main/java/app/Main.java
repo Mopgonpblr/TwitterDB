@@ -1,7 +1,11 @@
-import entities.*;
+package app;
+
+import app.entities.*;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.core.io.Resource;
-import service.*;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import app.service.*;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -9,12 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-//@SpringBootApplication
-public class Main {
-    public static void main(String[] args) throws IOException {
+import org.springframework.context.ApplicationContext;
 
-        AnnotationConfigApplicationContext context
-                = new AnnotationConfigApplicationContext(ContextConfiguration.class);
+@SpringBootApplication(exclude = HibernateJpaAutoConfiguration.class)
+public class Main {
+
+    public static void main(String[] args) {
+
+        ApplicationContext context = SpringApplication.run(Main.class, args);
+        //new AnnotationConfigApplicationContext(ContextConfiguration.class);
 
         UserService userService = context.getBean("userService", UserService.class);
         TweetService tweetService = context.getBean("tweetService", TweetService.class);
@@ -55,17 +62,23 @@ public class Main {
         Resource res = context.getResource("classpath:ticketData.txt");
         ArrayList<String> list = createArrayList(res);
         System.out.println(list.get(0));
+        System.out.println("\n" + userService.getConditionalValue());
+
     }
 
-    public static ArrayList<String> createArrayList(Resource res) throws IOException {
+
+    public static ArrayList<String> createArrayList(Resource res) {
         ArrayList<String> list = new ArrayList<>();
+        try {
+            Scanner scanner = new Scanner(res.getContentAsString(Charset.defaultCharset()));
+            while (scanner.hasNextLine()) {
+                list.add(scanner.nextLine());
+            }
 
-        Scanner scanner = new Scanner(res.getContentAsString(Charset.defaultCharset()));
-        while (scanner.hasNextLine()) {
-            list.add(scanner.nextLine());
+            scanner.close();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
         }
-
-        scanner.close();
         return list;
     }
 }

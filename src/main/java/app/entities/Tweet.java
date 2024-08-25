@@ -1,4 +1,4 @@
-package entities;
+package app.entities;
 
 import jakarta.persistence.*;
 
@@ -30,8 +30,23 @@ public class Tweet {
         this.creationDate = LocalDate.now();
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public LocalDate getCreationDate(){
+        return creationDate;
+    }
 
     public String toString() {
-        return "\t"+ this.username + "\n" + this.text + "\n " + this.creationDate + "\n\n";
+        return "\t" + this.username + "\n" + this.text + "\n " + this.creationDate + "\n\n";
     }
 }

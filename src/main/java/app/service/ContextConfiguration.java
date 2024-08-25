@@ -1,12 +1,8 @@
-package service;
+package app.service;
 
-import dao.TweetDao;
-import dao.UserDao;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.*;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -16,25 +12,26 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableTransactionManagement
-@ComponentScan
-@PropertySource("classpath:application.properties")
+//@ComponentScan(basePackages = {"app/dao", "app/service"})
+//@PropertySource("classpath:application.properties")
 public class ContextConfiguration {
 
-
-    @Autowired
-    private DataSource dataSource;
-
     @Bean
-    public LocalSessionFactoryBean sessionFactory() {
-        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-        sessionFactory.setDataSource(dataSource);
-        sessionFactory.setPackagesToScan("entities");
-        return sessionFactory;
+    public PlatformTransactionManager transactionManager(SessionFactory sessionFactory) {
+        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+        transactionManager.setSessionFactory(sessionFactory);
+        return transactionManager;
     }
 
     @Bean
-    @Autowired
+    public LocalSessionFactoryBean entityManagerFactory(DataSource dataSource) {
+        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+        sessionFactory.setDataSource(dataSource);
+        sessionFactory.setPackagesToScan("app/entities");
+        return sessionFactory;
+    }
+/*
+    @Bean
     public DataSource dataSource(@Value("${spring.datasource.username}") String userName, @Value("${spring.datasource.password}")String password, @Value("${spring.datasource.url}") String url) {
         DataSourceBuilder dataSource = DataSourceBuilder.create();
         dataSource.username(userName);
@@ -43,21 +40,11 @@ public class ContextConfiguration {
         return dataSource.build();
     }
 
-    @Bean
-    public PlatformTransactionManager hibernateTransactionManager(SessionFactory sessionFactory) {
-        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(sessionFactory);
-        return transactionManager;
-    }
+ */
 
     @Bean
-    public UserDao userDao(){
-        return new UserDao();
+    @ConditionalOnProperty("property.condition")
+    public String ThisIsMyFirstConditionalBean() {
+        return "This will appear only if @ConditionalOnProperty statement is true";
     }
-
-    @Bean
-    public TweetDao tweetDao(){
-        return new TweetDao();
-    }
-
 }
