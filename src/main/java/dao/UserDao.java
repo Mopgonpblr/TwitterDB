@@ -19,7 +19,7 @@ public class UserDao {
         return sessionFactory.getCurrentSession().get(User.class, username);
     }
 
-    public void updateAvatar(String username, String avatar, Tweet tweet) throws Exception {
+    public void updateAvatar(String username, String avatar, Tweet tweet) {
         User user = sessionFactory.getCurrentSession().get(User.class, username);
         user.setAvatar(avatar);
         sessionFactory.getCurrentSession().saveOrUpdate(user);
