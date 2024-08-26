@@ -6,20 +6,19 @@ import app.entities.Tweet;
 import app.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
-@Component
 @Service
 public class UserService {
 
-    @Autowired
     private UserDao userDao;
 
     @Autowired
-    private String conditionalValue;
+    public UserService(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     @Value("${property.update-user-and-tweet}")
     private boolean allowed;
@@ -47,9 +46,5 @@ public class UserService {
         } else {
             throw new Exception("property.update-user-and-tweet = false");
         }
-    }
-
-    public String getConditionalValue() {
-        return conditionalValue;
     }
 }

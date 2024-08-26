@@ -8,30 +8,45 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Component
+
 @Service
 public class TweetService {
 
+    private TweetRepository tweetRepository;
+
     @Autowired
-    private TweetRepository repo;
+    public TweetService(TweetRepository tweetRepository) {
+        this.tweetRepository = tweetRepository;
+    }
 
     @Transactional
-    public Tweet findTweetsById(int id) {
-        return repo.findById(id);
+    public Tweet findTweetById(int id) {
+        return tweetRepository.findById(id);
     }
 
     @Transactional
     public List<Tweet> findTweetsByUsername(String username) {
-        return repo.findAllByUsername(username);
+        return tweetRepository.findAllByUsername(username);
     }
 
     @Transactional
     public void createTweet(Tweet tweet) {
-        repo.save(tweet);
+        tweetRepository.save(tweet);
     }
 
     @Transactional
     public void deleteTweet(Tweet tweet) {
-        repo.delete(tweet);
+        tweetRepository.delete(tweet);
+    }
+
+    private String conditionalValue;
+
+    public String getConditionalValue() {
+        return conditionalValue;
+    }
+
+    @Autowired
+    public void setConditionalValue(String conditionalValue) {
+        this.conditionalValue = conditionalValue;
     }
 }
