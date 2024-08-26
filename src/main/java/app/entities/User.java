@@ -1,4 +1,4 @@
-package entities;
+package app.entities;
 
 import jakarta.persistence.*;
 
@@ -7,6 +7,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     private String username;
 
@@ -42,6 +43,7 @@ public class User {
         this.avatar = avatar;
     }
 
+    @Override
     public String toString() {
         return this.username + " | " + this.name + " | " + this.creationDate;
     }
