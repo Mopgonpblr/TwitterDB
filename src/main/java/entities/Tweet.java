@@ -32,6 +32,6 @@ public class Tweet {
 
 
     public String toString() {
-        return "\t"+ this.username + "\n" + this.text + "\n " + this.creationDate + "\n\n";
+        return "\t" + this.username + "\n" + this.text + "\n " + this.creationDate + "\n\n";
     }
 }
