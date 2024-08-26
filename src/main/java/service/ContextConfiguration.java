@@ -2,11 +2,10 @@ package service;
 
 import dao.TweetDao;
 import dao.UserDao;
+import org.postgresql.ds.PGSimpleDataSource;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.*;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -21,12 +20,8 @@ import javax.sql.DataSource;
 @PropertySource("classpath:application.properties")
 public class ContextConfiguration {
 
-
-    @Autowired
-    private DataSource dataSource;
-
     @Bean
-    public LocalSessionFactoryBean sessionFactory() {
+    public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
         sessionFactory.setPackagesToScan("entities");
@@ -34,13 +29,12 @@ public class ContextConfiguration {
     }
 
     @Bean
-    @Autowired
     public DataSource dataSource(@Value("${spring.datasource.username}") String userName, @Value("${spring.datasource.password}")String password, @Value("${spring.datasource.url}") String url) {
-        DataSourceBuilder dataSource = DataSourceBuilder.create();
-        dataSource.username(userName);
-        dataSource.password(password);
-        dataSource.url(url);
-        return dataSource.build();
+        PGSimpleDataSource dataSource = new PGSimpleDataSource();
+        dataSource.setUser(userName);
+        dataSource.setPassword(password);
+        dataSource.setURL(url);
+        return dataSource;
     }
 
     @Bean
