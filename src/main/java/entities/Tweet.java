@@ -10,10 +10,10 @@ public class Tweet {
     @Id
     private int id;
 
-    @Column(name = "username")
+    @Column
     private String username;
 
-    @Column(name = "text")
+    @Column
     private String text;
 
     @Column(name = "creation_date")
@@ -32,6 +32,6 @@ public class Tweet {
 
 
     public String toString() {
-        return "\t"+ this.username + "\n" + this.text + "\n " + this.creationDate + "\n\n";
+        return "\t" + this.username + "\n" + this.text + "\n " + this.creationDate + "\n\n";
     }
 }

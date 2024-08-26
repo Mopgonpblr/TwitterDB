@@ -7,6 +7,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     private String username;
 
@@ -41,6 +42,7 @@ public class User {
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
+
 
     public String toString() {
         return this.username + " | " + this.name + " | " + this.creationDate;
