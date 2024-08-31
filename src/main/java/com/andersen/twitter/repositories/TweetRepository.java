@@ -1,6 +1,6 @@
-package app.repositories;
+package com.andersen.twitter.repositories;
 
-import app.entities.Tweet;
+import com.andersen.twitter.entities.Tweet;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,7 +1,7 @@
-package app.controllers;
+package com.andersen.twitter.controllers;
 
-import app.entities.Tweet;
-import app.service.TweetService;
+import com.andersen.twitter.entities.Tweet;
+import com.andersen.twitter.service.TweetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,4 +1,4 @@
-package app.service;
+package com.andersen.twitter.service;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;

@@ -36,4 +36,4 @@ build/
 
 ### Mac OS ###
 .DS_Store
-/src/main/java/app/hibernate/
+/src/main/java/com/andersen/twitter/hibernate/

@@ -1,9 +1,9 @@
-package app.service;
+package com.andersen.twitter.service;
 
-import app.constants.AutoTweets;
-import app.dao.UserDao;
-import app.entities.Tweet;
-import app.entities.User;
+import com.andersen.twitter.constants.AutoTweets;
+import com.andersen.twitter.dao.UserDao;
+import com.andersen.twitter.entities.Tweet;
+import com.andersen.twitter.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

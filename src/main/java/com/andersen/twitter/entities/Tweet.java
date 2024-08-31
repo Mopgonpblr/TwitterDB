@@ -1,4 +1,4 @@
-package app.entities;
+package com.andersen.twitter.entities;
 
 import jakarta.persistence.*;
 

@@ -1,7 +1,7 @@
-package app.service;
+package com.andersen.twitter.service;
 
-import app.entities.Tweet;
-import app.repositories.TweetRepository;
+import com.andersen.twitter.entities.Tweet;
+import com.andersen.twitter.repositories.TweetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.Transactional;

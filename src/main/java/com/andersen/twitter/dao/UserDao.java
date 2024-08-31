@@ -1,7 +1,7 @@
-package app.dao;
+package com.andersen.twitter.dao;
 
-import app.entities.Tweet;
-import app.entities.User;
+import com.andersen.twitter.entities.Tweet;
+import com.andersen.twitter.entities.User;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
