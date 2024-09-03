@@ -1,4 +1,4 @@
-package entities;
+package com.andersen.twitter.entities;
 
 import jakarta.persistence.*;
 
@@ -10,10 +10,10 @@ public class Tweet {
     @Id
     private int id;
 
-    @Column(name = "username")
+    @Column
     private String username;
 
-    @Column(name = "text")
+    @Column
     private String text;
 
     @Column(name = "creation_date")
@@ -30,8 +30,24 @@ public class Tweet {
         this.creationDate = LocalDate.now();
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
+
+    @Override
     public String toString() {
-        return "\t"+ this.username + "\n" + this.text + "\n " + this.creationDate + "\n\n";
+        return "\t" + this.username + "\n" + this.text + "\n " + this.creationDate + "\n\n";
     }
 }
