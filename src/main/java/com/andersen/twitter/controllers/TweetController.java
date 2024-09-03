@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/tweet")
 public class TweetController {
 
     private TweetService service;
@@ -15,22 +16,22 @@ public class TweetController {
         this.service = service;
     }
 
-    @RequestMapping(value = "/tweet/get",method = RequestMethod.GET)
+    @GetMapping(value = "/get")
     public Tweet getTweet() {
         return service.findTweetById(1);
     }
 
-    @RequestMapping(value = "tweet/create", method = RequestMethod.POST)
+    @PostMapping(value = "/create")
     public void createTweet() {
         service.createTweet(new Tweet(1, "TwitterAdmin", "Hello, #Twitter!"));
     }
 
-    @RequestMapping(value = "tweet/delete", method = RequestMethod.POST)
+    @PostMapping(value = "/delete")
     public void deleteTweet() {
         service.deleteTweet(service.findTweetById(1));
     }
 
-    @RequestMapping(value = "/condition", method = RequestMethod.GET)
+    @GetMapping(value = "/condition")
     public String getConditionalValue() {
         return service.getConditionalValue();
     }
